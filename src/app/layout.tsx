@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Lora } from 'next/font/google'
 
 import './globals.css'
+import NavLink from './nav-link'
 
 const serif = Lora({
   subsets: ['latin'],
@@ -35,21 +36,11 @@ export default function RootLayout({
             </h1>
           </header>
           <nav className="bg-beige sticky top-0 z-10 -mx-4 mt-1 flex justify-center gap-3 overflow-scroll sm:mt-3 sm:gap-6">
-            <Link className="py-3 underline underline-offset-4" href="/">
-              Hem
-            </Link>
-            <Link className="py-3 underline-offset-4 hover:underline" href="/">
-              Bröllopet
-            </Link>
-            <Link className="py-3 underline-offset-4 hover:underline" href="/">
-              Info
-            </Link>
-            <Link className="py-3 underline-offset-4 hover:underline" href="/">
-              O.S.A
-            </Link>
-            <Link className="py-3 underline-offset-4 hover:underline" href="/">
-              Kontakt
-            </Link>
+            <NavLink href="/">Hem</NavLink>
+            <NavLink href="/brollopet">Bröllopet</NavLink>
+            <NavLink href="/info">Info</NavLink>
+            <NavLink href="/osa">O.S.A</NavLink>
+            <NavLink href="/kontakt">Kontakt</NavLink>
           </nav>
 
           <main className="mt-8 sm:mt-14">{children}</main>

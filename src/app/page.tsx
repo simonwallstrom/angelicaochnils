@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function Home() {
+export default function Page() {
   return (
     <div className="">
       <div className="-mx-2 rotate-1 border-8 border-white shadow">

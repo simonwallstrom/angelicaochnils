@@ -6,7 +6,7 @@
 ## Pages
 
 - Välkommen
-- Bröloppet
+- Bröllopet
 - Info
 - O.S.A
 - Kontakt
