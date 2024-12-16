@@ -4,6 +4,7 @@ import { Lora } from 'next/font/google'
 
 import './globals.css'
 import NavLink from './nav-link'
+import { CountDown } from './countdown'
 
 const serif = Lora({
   subsets: ['latin'],
@@ -45,28 +46,11 @@ export default function RootLayout({
 
           <main className="mt-8 sm:mt-14">{children}</main>
 
-          <footer className="relative mt-12 mb-12 flex justify-center border border-black/10 sm:mt-20 sm:mb-24">
+          <footer className="relative mt-12 mb-12 flex justify-center border border-dashed border-black/20 sm:mt-20 sm:mb-24">
             <div className="bg-beige absolute -mt-4 flex h-8 items-center">
               <span className="px-4 tracking-[5px] uppercase">Bröllopsdag om</span>
             </div>
-            <div className="grid w-full grid-cols-2 gap-6 px-6 py-12 sm:grid-cols-4">
-              <div className="text-center">
-                <div className="font-serif text-5xl md:text-7xl">215</div>
-                <div className="mt-1 text-sm tracking-widest uppercase sm:text-base">Dagar</div>
-              </div>
-              <div className="text-center">
-                <div className="font-serif text-5xl md:text-7xl">08</div>
-                <div className="mt-1 text-sm tracking-widest uppercase sm:text-base">Timmar</div>
-              </div>
-              <div className="text-center">
-                <div className="font-serif text-5xl md:text-7xl">45</div>
-                <div className="mt-1 text-sm tracking-widest uppercase sm:text-base">Minuter</div>
-              </div>
-              <div className="text-center">
-                <div className="font-serif text-5xl md:text-7xl">29</div>
-                <div className="mt-1 text-sm tracking-widest uppercase sm:text-base">Sekunder</div>
-              </div>
-            </div>
+            <CountDown />
           </footer>
         </div>
       </body>

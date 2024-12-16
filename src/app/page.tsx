@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function Page() {
   return (
     <div className="">
-      <div className="-mx-2 rotate-1 border-8 border-white shadow">
+      <div className="-mx-2 rotate-1 bg-white p-2 shadow">
         <Image
           priority
           src="/angelicaochnils.jpg"
