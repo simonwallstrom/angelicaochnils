@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { Lora } from 'next/font/google'
 
 import './globals.css'
@@ -26,17 +25,17 @@ export default function RootLayout({
 }>) {
   return (
     <html className={`bg-beige text-zinc-950 ${serif.variable}`} lang="sv">
-      <body className="font-serif md:text-lg">
+      <body className="font-serif">
         <div className="mx-auto max-w-4xl px-4 sm:px-12">
           <header className="mt-12 text-center sm:mt-20">
             <h1 className="ml-1">
-              <div className="text-base tracking-[5px] uppercase">– 15 Juli 2025 –</div>
+              <div className="tracking-[5px] uppercase">– 15 Juli 2025 –</div>
               <div className="mt-3 text-3xl tracking-widest uppercase sm:mt-6 sm:text-5xl sm:tracking-[8px]">
                 Angelica & Nils
               </div>
             </h1>
           </header>
-          <nav className="bg-beige sticky top-0 z-10 -mx-4 mt-1 flex justify-center gap-3 overflow-scroll sm:mt-3 sm:gap-6">
+          <nav className="bg-beige sticky top-0 z-10 -mx-4 mt-1 flex justify-center gap-3 overflow-scroll font-medium sm:mt-3 sm:gap-6">
             <NavLink href="/">Hem</NavLink>
             <NavLink href="/brollopet">Bröllopet</NavLink>
             <NavLink href="/info">Info</NavLink>

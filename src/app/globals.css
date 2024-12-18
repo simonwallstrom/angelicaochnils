@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@plugin "@tailwindcss/forms";
+
 @theme {
   --color-beige: #f4f0e9;
 }

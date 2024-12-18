@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function Page() {
   return (
     <div className="">
-      <div className="-mx-2 rotate-1 bg-white p-2 shadow">
+      <div className="bg-white p-2 shadow">
         <Image
           priority
           src="/angelicaochnils.jpg"
@@ -22,9 +22,8 @@ export default function Page() {
         <p className="mt-4 leading-relaxed">
           Vi har samlat den viktigaste informationen här på hemsidan. Här finns bland annat
           information om förmingel, vigsel, fest, boende och praktiska detaljer och lite annat som
-          ni kan tänkas vilja veta. Hemsidan uppdateras löpande med information, och vi kommer att
-          kommunicera viktig information till er på mailadressen som ni anger när ni lämnar er
-          O.S.A.
+          ni kan tänkas vilja veta. Vi kommer att kommunicera viktig information till er på
+          mailadressen som ni anger när ni lämnar er O.S.A.
         </p>
       </div>
     </div>

@@ -19,18 +19,15 @@ const useCountdown = (targetDate: Date) => {
     return { days, hours, minutes, seconds }
   }, [])
 
-  const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate)) // Initialize with calculated time left
+  const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate))
 
-  const startTimer = () => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft(calculateTimeLeft(targetDate))
     }, 1000)
 
     return () => clearInterval(interval)
-  }
-
-  // Start the timer immediately
-  startTimer()
+  }, [calculateTimeLeft, targetDate]) // Ensure cleanup on unmount and when dependencies change
 
   return timeLeft
 }
@@ -39,49 +36,17 @@ export function CountDown() {
   const weddingDate = new Date('2025-07-15T00:00:00')
   const timeLeft = useCountdown(weddingDate)
 
-  // Check if the component is mounted to avoid hydration issues
-  const [isMounted, setIsMounted] = useState(false)
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
   return (
-    <>
-      <div className="grid w-full grid-cols-2 gap-6 px-6 py-12 sm:grid-cols-4">
-        <div className="text-center">
-          {isMounted ? (
-            <div className="font-serif text-5xl md:text-7xl">{timeLeft.days}</div>
-          ) : (
-            <div className="font-serif text-5xl opacity-0 md:text-7xl">&nbsp;</div>
-          )}
-          <div className="mt-1 text-sm tracking-widest uppercase sm:text-base">Dagar</div>
-        </div>
-        <div className="text-center">
-          {isMounted ? (
-            <div className="font-serif text-5xl md:text-7xl">{timeLeft.hours}</div>
-          ) : (
-            <div className="font-serif text-5xl opacity-0 md:text-7xl">&nbsp;</div>
-          )}
-          <div className="mt-1 text-sm tracking-widest uppercase sm:text-base">Timmar</div>
-        </div>
-        <div className="text-center">
-          {isMounted ? (
-            <div className="font-serif text-5xl md:text-7xl">{timeLeft.minutes}</div>
-          ) : (
-            <div className="font-serif text-5xl opacity-0 md:text-7xl">&nbsp;</div>
-          )}
-          <div className="mt-1 text-sm tracking-widest uppercase sm:text-base">Minuter</div>
-        </div>
-        <div className="text-center">
-          {isMounted ? (
-            <div className="font-serif text-5xl md:text-7xl">{timeLeft.seconds}</div>
-          ) : (
-            <div className="font-serif text-5xl opacity-0 md:text-7xl">&nbsp;</div>
-          )}
-          <div className="mt-1 text-sm tracking-widest uppercase sm:text-base">Sekunder</div>
-        </div>
-      </div>
-    </>
+    <div className="grid w-full grid-cols-2 gap-6 px-6 py-12 sm:grid-cols-4">
+      {['Dagar', 'Timmar', 'Minuter', 'Sekunder'].map((label, index) => {
+        const values = [timeLeft.days, timeLeft.hours, timeLeft.minutes, timeLeft.seconds]
+        return (
+          <div className="text-center" key={label}>
+            <div className="font-serif text-5xl md:text-6xl">{values[index]}</div>
+            <div className="mt-1 text-sm tracking-widest uppercase">{label}</div>
+          </div>
+        )
+      })}
+    </div>
   )
 }
