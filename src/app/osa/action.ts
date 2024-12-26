@@ -25,21 +25,47 @@ export async function createContact(prevState: unknown, formData: FormData) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
+      first_name: submission.value.firstName,
+      last_name: submission.value.lastName,
       email: submission.value.emailAddress,
-      lists: [],
-      attributes: {},
+      lists: [
+        {
+          hash: submission.value.isAttending === 'true' ? 'e7TIsIyJoMJBUXkGzl' : '6hXETqDhd',
+        },
+      ],
+      attributes: {
+        telefonnummer: submission.value.phoneNumber,
+        'kommer-du': submission.value.isAttending === 'true' ? 'Ja' : 'Nej',
+        ...(submission.value.isAttending === 'true'
+          ? {
+              'antal-natter': submission.value.numberOfNights === 'one' ? 1 : 2,
+              kostalternativ: submission.value.dietaryRequirements,
+              barn: submission.value.hasKids === 'true' ? 'Ja' : 'Nej',
+              favoritlat: submission.value.favoriteSong,
+            }
+          : {}),
+      },
     }),
   })
 
   if (!response.ok) {
-    return submission.reply({
-      formErrors: ['Ett okänt fel uppstod'],
-    })
+    const res = await response.json()
+    console.log(res.email.length)
+    if (res.email.length === 1) {
+      console.log('inside if')
+      return submission.reply({
+        formErrors: [
+          'Det finns redan ett svar som är kopplat till denna e-postadress, kontakta Angelica och Nils för att uppdatera ditt svar.',
+        ],
+      })
+    } else {
+      return submission.reply({
+        formErrors: ['Ett okänt fel uppstod'],
+      })
+    }
   }
 
-  return null
-
-  // redirect('/')
+  redirect('/osa/tack')
 }
 
 export async function createContactExample(formData: FormData) {

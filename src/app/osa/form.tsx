@@ -54,10 +54,7 @@ export function Form() {
       <div className="grid items-start gap-6 md:grid-cols-2">
         <div className="grid gap-2">
           <label className="font-semibold select-none" htmlFor="firstName">
-            Förnamn{' '}
-            <span className="text-red-600" aria-hidden="true">
-              *
-            </span>
+            Förnamn
           </label>
           <input
             type="text"
@@ -85,6 +82,9 @@ export function Form() {
             name={fields.lastName.name}
             defaultValue={fields.lastName.initialValue}
             id="lastName"
+            aria-required="true"
+            aria-invalid={!!fields.lastName.errors}
+            aria-describedby={fields.lastName.errors ? 'lastName-error' : undefined}
           />
           <div className="text-red-600">{fields.lastName.errors}</div>
         </div>
@@ -99,6 +99,9 @@ export function Form() {
           name={fields.emailAddress.name}
           defaultValue={fields.emailAddress.initialValue}
           id="emailAddress"
+          aria-required="true"
+          aria-invalid={!!fields.emailAddress.errors}
+          aria-describedby={fields.emailAddress.errors ? 'emailAddress-error' : undefined}
         />
         <div className="text-red-600">{fields.emailAddress.errors}</div>
       </div>
@@ -112,6 +115,9 @@ export function Form() {
           name={fields.phoneNumber.name}
           defaultValue={fields.phoneNumber.initialValue}
           id="phoneNumber"
+          aria-required="true"
+          aria-invalid={!!fields.phoneNumber.errors}
+          aria-describedby={fields.phoneNumber.errors ? 'phoneNumber-error' : undefined}
         />
         <div className="text-red-600">{fields.phoneNumber.errors}</div>
       </div>
@@ -259,11 +265,10 @@ export function Form() {
         >
           {pending ? 'Skickar...' : 'Skicka'}
         </button>
-        {lastResult?.status === 'error' && (
-          <div className="mt-2 text-center text-red-600" role="alert">
-            Ett okänt fel uppstod
-          </div>
-        )}
+
+        <div className="mt-2 text-center text-red-600" role="alert">
+          {form.errors}
+        </div>
       </div>
     </form>
   )
