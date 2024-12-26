@@ -35,7 +35,7 @@ export default function RootLayout({
               </div>
             </h1>
           </header>
-          <nav className="bg-beige sticky top-0 z-10 -mx-4 mt-1 flex justify-center gap-3 overflow-scroll font-medium sm:mt-3 sm:gap-6">
+          <nav className="bg-beige sticky top-0 z-10 -mx-4 mt-1 flex justify-center gap-3 overflow-scroll sm:mt-3 sm:gap-6">
             <NavLink href="/">Hem</NavLink>
             <NavLink href="/brollopet">Bröllopet</NavLink>
             <NavLink href="/info">Info</NavLink>

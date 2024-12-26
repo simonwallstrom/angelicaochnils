@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Form } from './form'
 
 export default function Page() {
@@ -5,7 +6,7 @@ export default function Page() {
     <div className="border-t border-dashed border-black/20">
       <div className="">
         <h1 className="mt-6 text-3xl font-medium sm:mt-12">O.S.A</h1>
-        <p className="mt-4 font-semibold text-blue-600 italic">O.S.A senast 14 april 2025</p>
+        <p className="mt-4 font-semibold text-red-600 italic">O.S.A senast 14 april 2025</p>
         <p className="mt-4 leading-relaxed">
           Då vi har begränsat med plats så ber vi er ödmjukast att fråga oss om en eventuell +1 om
           du är inbjuden som "singel". Är ni flera personer på samma inbjudan går det bra att o.s.a.
@@ -27,7 +28,10 @@ export default function Page() {
         </div>
         <p className="mt-6 italic">
           Har man inte möjlighet att sova över men vill delta under vigseln eller vid andra frågor
-          som rör övernattning, kontakta Angelica eller Nils.
+          som rör övernattning,{' '}
+          <Link className="text-blue-600 underline hover:no-underline" href="/kontakt">
+            kontakta Angelica eller Nils →
+          </Link>
         </p>
         <Form />
       </div>

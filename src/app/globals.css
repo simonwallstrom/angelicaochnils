@@ -5,3 +5,15 @@
 @theme {
   --color-beige: #f4f0e9;
 }
+
+/* input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='radio'],
+textarea {
+  @apply focus:border-indigo-500 focus:ring-indigo-500;
+}
+
+[type='radio']:checked {
+  @apply bg-indigo-500;
+} */
