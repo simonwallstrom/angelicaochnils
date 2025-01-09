@@ -9,11 +9,10 @@ export default function Page() {
         <p className="mt-4 font-semibold text-red-600 italic">O.S.A senast 14 april 2025</p>
         <p className="mt-4 leading-relaxed">
           Då vi har begränsat med plats så ber vi er ödmjukast att fråga oss om en eventuell +1 om
-          du är inbjuden som "singel". Är ni flera personer på samma inbjudan går det bra att o.s.a.
-          för alla samtidigt genom att klicka på "Lägg till person" längst ner i formuläret.
+          du är inbjuden som "singel". Det är viktigt att göra en anmälan för varje person, även om
+          ni delar hushåll.
         </p>
         <ul className="mt-4 list-disc space-y-1 pl-4">
-          <li>Det är viktigt att göra en anmälan för varje person, även om ni delar hushåll.</li>
           <li>Ange eventuella allergier och specialkost i meddelandefältet nedan.</li>
           <li>Passa på att önska din favoritlåt som du skulle vilja dansa till.</li>
         </ul>

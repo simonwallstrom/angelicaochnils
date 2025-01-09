@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { Lora } from 'next/font/google'
 
-import './globals.css'
-import NavLink from './nav-link'
-import { CountDown } from './countdown'
+import '~/globals.css'
+import NavLink from '~/components/nav-link'
+import { CountDown } from '~/components/countdown'
 
 const serif = Lora({
   subsets: ['latin'],
@@ -13,9 +13,6 @@ const serif = Lora({
 
 export const metadata: Metadata = {
   title: 'Angelica och Nils · 15 Juli 2025',
-  icons: {
-    icon: 'https://fav.farm/❤️',
-  },
 }
 
 export default function RootLayout({
@@ -35,7 +32,7 @@ export default function RootLayout({
               </div>
             </h1>
           </header>
-          <nav className="bg-beige sticky top-0 z-10 -mx-4 mt-1 flex justify-center gap-3 overflow-scroll sm:mt-3 sm:gap-6">
+          <nav className="bg-beige sticky top-0 z-10 -mx-4 mt-1 flex justify-center gap-3 overflow-scroll sm:mt-4 sm:gap-6">
             <NavLink href="/">Hem</NavLink>
             <NavLink href="/brollopet">Bröllopet</NavLink>
             <NavLink href="/info">Info</NavLink>

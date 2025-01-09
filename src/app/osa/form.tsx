@@ -177,7 +177,7 @@ export function Form() {
                   key={fields.numberOfNights.key}
                   name={fields.numberOfNights.name}
                   id="one-night"
-                  value="one"
+                  value="1"
                 />
                 <span>1 natt</span>
               </label>
@@ -188,7 +188,7 @@ export function Form() {
                   key={fields.numberOfNights.key}
                   name={fields.numberOfNights.name}
                   id="two-nights"
-                  value="two"
+                  value="2"
                 />
                 <span>2 nätter</span>
               </label>
@@ -224,7 +224,7 @@ export function Form() {
                   key={fields.hasKids.key}
                   name={fields.hasKids.name}
                   id="kids-yes"
-                  value="true"
+                  value="Ja"
                 />
                 <span>Ja</span>
               </label>
@@ -235,7 +235,7 @@ export function Form() {
                   key={fields.hasKids.key}
                   name={fields.hasKids.name}
                   id="kids-no"
-                  value="false"
+                  value="Nej"
                 />
                 <span>Nej</span>
               </label>

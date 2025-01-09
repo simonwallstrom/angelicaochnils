@@ -25,9 +25,9 @@ export const rsvpSchema = z
     isAttending: z.enum(['true', 'false'], {
       required_error: 'Du måste välja om du kommer eller inte',
     }),
-    numberOfNights: z.enum(['one', 'two']).optional().nullable(),
+    numberOfNights: z.enum(['1', '2']).optional(),
     dietaryRequirements: z.string().optional(),
-    hasKids: z.enum(['true', 'false']).optional().nullable(),
+    hasKids: z.enum(['Ja', 'Nej']).optional(),
     favoriteSong: z.string().optional(),
   })
   .superRefine((data, ctx) => {
@@ -35,7 +35,7 @@ export const rsvpSchema = z
       if (!data.numberOfNights) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Du måste välja antal nätter när du kommer',
+          message: 'Du måste välja antal nätter',
           path: ['numberOfNights'],
         })
       }
