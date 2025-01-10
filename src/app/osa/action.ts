@@ -32,7 +32,7 @@ export async function createContact(prevState: unknown, formData: FormData) {
     email: submission.value.emailAddress,
     lists: [
       {
-        hash: submission.value.isAttending === 'true' ? 'e7TIsIyJoMJBUXkGzl' : '6hXETqDhd',
+        hash: submission.value.isAttending === 'true' ? 'mE6faz' : 'NWT8nHDA8P',
       },
     ],
     attributes: {

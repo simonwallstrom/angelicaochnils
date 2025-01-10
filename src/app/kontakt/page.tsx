@@ -18,7 +18,10 @@ export default function Page() {
           <li>nils.b.norgren@gmail.com</li>
         </ul>
 
-        <div className="mt-8 border-t border-dashed border-black/20 pt-8">
+        <div
+          id="toastpar"
+          className="mt-8 scroll-mt-12 border-t border-dashed border-black/20 pt-8"
+        >
           <div>
             Kontakta vårt toastpar om allt som rör planering kring tal, överraskningar och annat som
             förgyller vår dag.
