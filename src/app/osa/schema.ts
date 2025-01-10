@@ -22,12 +22,18 @@ export const rsvpSchema = z
         required_error: 'Telefonnummer är obligatoriskt',
       })
       .min(1, 'Telefonnummer är obligatoriskt'),
+    code: z
+      .string({
+        required_error: 'Inbjudningskoden är obligatorisk',
+      })
+      .min(1, 'Inbjudningskoden är obligatorisk')
+      .transform((val) => val.replace(/\s/g, '')),
     isAttending: z.enum(['true', 'false'], {
       required_error: 'Du måste välja om du kommer eller inte',
     }),
     numberOfNights: z.enum(['1', '2']).optional(),
-    dietaryRequirements: z.string().optional(),
     hasKids: z.enum(['Ja', 'Nej']).optional(),
+    dietaryRequirements: z.string().optional(),
     favoriteSong: z.string().optional(),
   })
   .superRefine((data, ctx) => {

@@ -12,26 +12,17 @@ export function Form() {
   const [lastResult, action, pending] = useActionState(createContact, undefined)
 
   const [form, fields] = useForm({
-    // Sync the result of last submission
     lastResult,
-
-    // Reuse the validation logic on the client
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: rsvpSchema })
     },
-
-    // Validate the form on blur event triggered
     shouldValidate: 'onSubmit',
     shouldRevalidate: 'onInput',
   })
 
-  // Hack to opt-out of useActionState resetting the form
-  // https://github.com/edmundhung/conform/issues/681#issuecomment-2174388025
   useEffect(() => {
     const preventDefault = (event: Event) => {
-      // Make sure the reset event is dispatched on the corresponding form element
       if (event.target === document.forms.namedItem(form.id)) {
-        // Tell Conform to ignore the form reset event
         event.preventDefault()
       }
     }
@@ -50,6 +41,7 @@ export function Form() {
       action={action}
       noValidate
       className="mt-10 bg-white p-6 shadow-sm md:p-12"
+      aria-label="RSVP formulär"
     >
       <div className="grid items-start gap-6 md:grid-cols-2">
         <div className="grid gap-2">
@@ -86,7 +78,9 @@ export function Form() {
             aria-invalid={!!fields.lastName.errors}
             aria-describedby={fields.lastName.errors ? 'lastName-error' : undefined}
           />
-          <div className="text-red-600">{fields.lastName.errors}</div>
+          <div className="text-red-600" id="lastName-error" role="alert">
+            {fields.lastName.errors}
+          </div>
         </div>
       </div>
       <div className="mt-6 grid gap-2">
@@ -103,7 +97,9 @@ export function Form() {
           aria-invalid={!!fields.emailAddress.errors}
           aria-describedby={fields.emailAddress.errors ? 'emailAddress-error' : undefined}
         />
-        <div className="text-red-600">{fields.emailAddress.errors}</div>
+        <div className="text-red-600" id="emailAddress-error" role="alert">
+          {fields.emailAddress.errors}
+        </div>
       </div>
       <div className="mt-6 grid gap-2">
         <label className="font-semibold select-none" htmlFor="phoneNumber">
@@ -119,7 +115,9 @@ export function Form() {
           aria-invalid={!!fields.phoneNumber.errors}
           aria-describedby={fields.phoneNumber.errors ? 'phoneNumber-error' : undefined}
         />
-        <div className="text-red-600">{fields.phoneNumber.errors}</div>
+        <div className="text-red-600" id="phoneNumber-error" role="alert">
+          {fields.phoneNumber.errors}
+        </div>
       </div>
       <div className="mt-6 grid gap-1">
         <div className="font-semibold" id="attending-label">
@@ -160,7 +158,7 @@ export function Form() {
           </label>
         </div>
         {fields.isAttending.errors && (
-          <div className="text-red-600" id="attending-error" role="alert">
+          <div className="mt-1 text-red-600" id="attending-error" role="alert">
             {fields.isAttending.errors}
           </div>
         )}
@@ -168,8 +166,16 @@ export function Form() {
       {attendingInfo ? (
         <>
           <div className="mt-6 grid gap-1">
-            <div className="font-semibold">Sover du kvar 1 eller 2 nätter?</div>
-            <div className="mt-1 grid gap-2">
+            <div className="font-semibold" id="nights-label">
+              Sover du kvar 1 eller 2 nätter?
+            </div>
+            <div
+              className="mt-1 grid gap-2"
+              role="radiogroup"
+              aria-labelledby="nights-label"
+              aria-required="true"
+              aria-invalid={!!fields.numberOfNights.errors}
+            >
               <label className="flex items-center gap-2" htmlFor="one-night">
                 <input
                   className="h-5 w-5"
@@ -178,6 +184,7 @@ export function Form() {
                   name={fields.numberOfNights.name}
                   id="one-night"
                   value="1"
+                  aria-describedby={fields.numberOfNights.errors ? 'nights-error' : undefined}
                 />
                 <span>1 natt</span>
               </label>
@@ -189,19 +196,22 @@ export function Form() {
                   name={fields.numberOfNights.name}
                   id="two-nights"
                   value="2"
+                  aria-describedby={fields.numberOfNights.errors ? 'nights-error' : undefined}
                 />
                 <span>2 nätter</span>
               </label>
             </div>
-            <div className="text-red-600">{fields.numberOfNights.errors}</div>
+            <div className="text-red-600" id="nights-error" role="alert">
+              {fields.numberOfNights.errors}
+            </div>
           </div>
           <div className="mt-6 grid">
             <label className="font-semibold select-none" htmlFor="dietaryRequirements">
-              Allergier/ Kostalternativ
+              Allergier/ Kostalternativ (Valfri)
             </label>
             <p className="mt-1 text-sm" id="diet-description">
               Berätta gärna om du har några allergier eller kostpreferenser, som vegetarisk eller
-              glutenfri. Om du inte har några, kan du lämna fältet tomt.
+              glutenfri.
             </p>
             <textarea
               className="mt-3"
@@ -212,11 +222,21 @@ export function Form() {
               aria-describedby="diet-description"
               aria-invalid={!!fields.dietaryRequirements.errors}
             ></textarea>
-            <div className="text-red-600">{fields.dietaryRequirements.errors}</div>
+            <div className="mt-2 text-red-600" id="dietary-error" role="alert">
+              {fields.dietaryRequirements.errors}
+            </div>
           </div>
           <div className="mt-6 grid gap-1">
-            <div className="font-semibold">Tar du med barn under 1 år?</div>
-            <div className="mt-1 grid gap-2">
+            <div className="font-semibold" id="kids-label">
+              Tar du med barn under 1 år?
+            </div>
+            <div
+              className="mt-1 grid gap-2"
+              role="radiogroup"
+              aria-labelledby="kids-label"
+              aria-required="true"
+              aria-invalid={!!fields.hasKids.errors}
+            >
               <label className="flex items-center gap-2" htmlFor="kids-yes">
                 <input
                   className="h-5 w-5"
@@ -225,6 +245,7 @@ export function Form() {
                   name={fields.hasKids.name}
                   id="kids-yes"
                   value="Ja"
+                  aria-describedby={fields.hasKids.errors ? 'kids-error' : undefined}
                 />
                 <span>Ja</span>
               </label>
@@ -236,15 +257,18 @@ export function Form() {
                   name={fields.hasKids.name}
                   id="kids-no"
                   value="Nej"
+                  aria-describedby={fields.hasKids.errors ? 'kids-error' : undefined}
                 />
                 <span>Nej</span>
               </label>
             </div>
-            <div className="text-red-600">{fields.hasKids.errors}</div>
+            <div className="text-red-600" id="kids-error" role="alert">
+              {fields.hasKids.errors}
+            </div>
           </div>
           <div className="mt-6 grid gap-2">
             <label className="font-semibold select-none" htmlFor="favoriteSong">
-              En låt jag absolut inte kan sitta still till…
+              En låt jag absolut inte kan sitta still till… (Valfri)
             </label>
             <input
               type="text"
@@ -252,15 +276,41 @@ export function Form() {
               name={fields.favoriteSong.name}
               defaultValue={fields.favoriteSong.initialValue}
               id="favoriteSong"
+              aria-invalid={!!fields.favoriteSong.errors}
             />
-            <div className="text-red-600">{fields.favoriteSong.errors}</div>
+            <div className="text-red-600" id="song-error" role="alert">
+              {fields.favoriteSong.errors}
+            </div>
           </div>
         </>
       ) : null}
+      <div className="mt-6 grid">
+        <label className="font-semibold select-none" htmlFor="code">
+          Inbjudningskod
+        </label>
+        <p className="mt-1 text-sm" id="code-description">
+          Ange koden som du hittar på din bröllopsinbjudan
+        </p>
+        <input
+          className="mt-3"
+          type="text"
+          key={fields.code.key}
+          name={fields.code.name}
+          defaultValue={fields.code.initialValue}
+          aria-describedby="code-description"
+          id="code"
+          aria-required="true"
+          aria-invalid={!!fields.code.errors}
+        />
+        <div className="mt-2 text-red-600" id="code-error" role="alert">
+          {fields.code.errors}
+        </div>
+      </div>
       <div className="mt-8">
         <button
           disabled={pending}
           aria-busy={pending}
+          aria-disabled={pending}
           className="w-full cursor-pointer border border-black bg-gray-800 px-10 py-2 font-semibold text-white outline-offset-2 outline-blue-600 select-none hover:bg-black focus-visible:outline-2 disabled:pointer-events-none disabled:opacity-60"
         >
           {pending ? 'Skickar...' : 'Skicka'}

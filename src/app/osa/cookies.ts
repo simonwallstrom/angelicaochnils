@@ -4,7 +4,7 @@ import { ContactResponse } from './types'
 export async function setSubmissionData(data: ContactResponse) {
   const cookieStore = await cookies()
   cookieStore.set('submission-data', JSON.stringify(data), {
-    maxAge: 30,
+    maxAge: 3600,
   })
 }
 

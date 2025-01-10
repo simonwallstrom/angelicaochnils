@@ -18,6 +18,14 @@ export async function createContact(prevState: unknown, formData: FormData) {
     return submission.reply()
   }
 
+  if (submission.value.code !== process.env.INVITATION_CODE) {
+    return submission.reply({
+      fieldErrors: {
+        code: ['Ogiltig inbjudningskod'],
+      },
+    })
+  }
+
   const requestData: CreateContactRequest = {
     first_name: submission.value.firstName,
     last_name: submission.value.lastName,
