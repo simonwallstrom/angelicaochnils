@@ -13,6 +13,10 @@ const serif = Lora({
 
 export const metadata: Metadata = {
   title: 'Angelica och Nils · 15 Juli 2025',
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function RootLayout({

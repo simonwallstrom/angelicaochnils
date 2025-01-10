@@ -7,7 +7,7 @@ export default function Page() {
         <Image priority src="/ulvhall.jpg" width={2318} height={2019} alt="Angelica och Nils" />
       </div>
       <div className="">
-        <h1 className="mt-6 text-3xl font-medium sm:mt-12">Bröllopet</h1>
+        <h1 className="mt-8 text-3xl font-medium sm:mt-12">Bröllopet</h1>
         <p className="mt-4 leading-relaxed">
           14-16 juli 2025 blir det äntligen bröllop och fest på Ulvhälls Herrgård. Vi hoppas att ni
           vill komma och fira med oss!

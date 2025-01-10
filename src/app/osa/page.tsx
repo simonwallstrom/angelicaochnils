@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <div className="border-t border-dashed border-black/20">
       <div className="">
-        <h1 className="mt-6 text-3xl font-medium sm:mt-12">O.S.A</h1>
+        <h1 className="mt-8 text-3xl font-medium sm:mt-12">O.S.A</h1>
         <p className="mt-4 font-semibold text-red-600 italic">O.S.A senast 14 april 2025</p>
         <p className="mt-4 leading-relaxed">
           Då vi har begränsat med plats så ber vi er ödmjukast att fråga oss om en eventuell +1 om
