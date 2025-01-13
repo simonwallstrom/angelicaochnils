@@ -12,8 +12,8 @@ export default function Page() {
           alt="Angelica och Nils"
         />
       </div>
-      <div className="">
-        <h1 className="mt-8 text-3xl font-medium sm:mt-12">Välkommen</h1>
+      <div className="mt-8 sm:mt-12">
+        <h1 className="text-3xl font-medium">Välkommen</h1>
         <p className="mt-4 leading-relaxed sm:mt-6">
           Äntligen bröllop i dagarna tre på Ulvhälls herrgård i Strängnäs och vi hoppas på att få
           dela dessa dagar med just dig. Du som har fått vår inbjudan med länken till denna sida är

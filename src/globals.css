@@ -4,4 +4,6 @@
 
 @theme {
   --color-beige: #f4f0e9;
+
+  --font-script: var(--font-script);
 }

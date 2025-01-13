@@ -41,7 +41,7 @@ const useCountdown = (targetDate: Date) => {
 }
 
 export function CountDown() {
-  const weddingDate = useMemo(() => new Date('2025-07-15T00:00:00'), [])
+  const weddingDate = useMemo(() => new Date('2025-07-14T17:00:00+02:00'), [])
   const timeLeft = useCountdown(weddingDate)
 
   if (!timeLeft) return null

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Lora } from 'next/font/google'
+import { Lora, Parisienne } from 'next/font/google'
 
 import '~/globals.css'
 import NavLink from '~/components/nav-link'
@@ -9,6 +9,13 @@ const serif = Lora({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-serif',
+})
+
+const script = Parisienne({
+  weight: ['400'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-script',
 })
 
 export const metadata: Metadata = {
@@ -25,30 +32,43 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html className={`bg-beige text-zinc-950 ${serif.variable}`} lang="sv">
+    <html className={`bg-beige text-zinc-950 ${serif.variable} ${script.variable}`} lang="sv">
       <body className="font-serif">
         <div className="mx-auto max-w-4xl px-4 sm:px-12">
           <header className="mt-12 text-center sm:mt-20">
             <h1 className="ml-1">
-              <div className="tracking-[5px] uppercase">– 15 Juli 2025 –</div>
-              <div className="mt-3 text-3xl tracking-widest uppercase sm:mt-6 sm:text-5xl sm:tracking-[8px]">
+              <div className="font-script text-xl leading-1 sm:text-2xl">
+                Bienvenue à notre mariage
+              </div>
+              <div className="mt-4 text-3xl tracking-widest uppercase sm:mt-6 sm:text-5xl sm:tracking-[8px]">
                 Angelica & Nils
+              </div>
+              <div className="mt-2 text-sm tracking-[5px] uppercase sm:mt-4 sm:text-base">
+                – 15 Juli 2025 –
               </div>
             </h1>
           </header>
-          <nav className="bg-beige sticky top-0 z-10 -mx-4 mt-1 flex justify-center gap-3 overflow-scroll sm:mt-4 sm:gap-6">
+          <nav className="bg-beige sticky -top-px z-10 -mx-4 mt-8 flex justify-center gap-4 sm:mt-12 sm:gap-6">
+            <div className="absolute w-full">
+              <div className="absolute h-px w-full border-t border-dashed border-black/50"></div>
+              <div className="from-beige to-beige absolute h-px w-full bg-gradient-to-r via-transparent"></div>
+            </div>
             <NavLink href="/">Hem</NavLink>
             <NavLink href="/brollopet">Bröllopet</NavLink>
             <NavLink href="/info">Info</NavLink>
             <NavLink href="/osa">O.S.A</NavLink>
             <NavLink href="/kontakt">Kontakt</NavLink>
+            <div className="absolute top-full w-full">
+              <div className="absolute h-px w-full border-t border-dashed border-black/50"></div>
+              <div className="from-beige to-beige absolute h-px w-full bg-gradient-to-r via-transparent"></div>
+            </div>
           </nav>
 
-          <main className="mt-8 sm:mt-14">{children}</main>
+          <main className="mt-8 sm:mt-12">{children}</main>
 
           <footer className="relative mt-12 mb-12 flex justify-center border border-dashed border-black/20 sm:mt-20 sm:mb-24">
             <div className="bg-beige absolute -mt-4 flex h-8 items-center">
-              <span className="px-4 tracking-[5px] uppercase">Bröllopsdag om</span>
+              <span className="px-4 tracking-[5px] uppercase">Bröllopet</span>
             </div>
             <CountDown />
           </footer>
