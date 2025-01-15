@@ -34,14 +34,18 @@ export default function Page() {
         herrgården.
       </p>
       <p className="mt-4 leading-relaxed">
-        <span className="font-medium">Ulvhälls allé 645 40 Strängnäs</span>
+        <span className="font-medium">Ulvhälls Herrgård</span>
         <br />
-        <Link
+        <span>Ulvhälls allé 645 40 Strängnäs</span>
+        <br />
+        <a
           className="whitespace-nowrap text-blue-600 underline hover:no-underline"
-          href="/kontakt"
+          href="https://maps.app.goo.gl/nhsYMYFoe3RfcuMf7"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Visa på Google Maps →
-        </Link>
+        </a>
       </p>
 
       <h2 className="mt-4 text-xl font-medium sm:mt-8">Klädkod</h2>
@@ -56,7 +60,7 @@ export default function Page() {
 
       <h2 className="mt-4 text-xl font-medium sm:mt-8">Present</h2>
       <p className="mt-3 leading-relaxed">
-        Present Att du deltar alla dagar står högst upp på vår önskelista.
+        Att du deltar alla dagar står högst upp på vår önskelista.
       </p>
 
       <h2 className="mt-4 text-xl font-medium sm:mt-8">Tal och spex</h2>

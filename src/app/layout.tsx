@@ -71,6 +71,11 @@ export default function RootLayout({
               <span className="px-4 tracking-[5px] uppercase">Bröllopet</span>
             </div>
             <CountDown />
+            <img
+              className="absolute top-1/2 left-1/2 z-10 w-44 -translate-x-1/2 -translate-y-1/2 opacity-10 md:w-72"
+              src="/logo.svg"
+              alt=""
+            />
           </footer>
         </div>
       </body>
