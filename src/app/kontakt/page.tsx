@@ -26,12 +26,12 @@ export default function Page() {
 
       <h2 className="mt-4 text-xl font-medium sm:mt-6">Rebecca Wicklén</h2>
       <ul className="mt-2 list-disc space-y-1 pl-4">
-        <li>076-4124773</li>
+        <li>070-9700898</li>
         <li>toastparetwicklen@gmail.com</li>
       </ul>
       <h2 className="mt-4 text-xl font-medium">Gustav Wicklén</h2>
       <ul className="mt-2 list-disc space-y-1 pl-4">
-        <li>070-4751466</li>
+        <li>070-4675532</li>
         <li>toastparetwicklen@gmail.com</li>
       </ul>
     </div>

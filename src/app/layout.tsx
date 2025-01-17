@@ -4,6 +4,7 @@ import { Lora, Parisienne } from 'next/font/google'
 import '~/globals.css'
 import NavLink from '~/components/nav-link'
 import { CountDown } from '~/components/countdown'
+import Link from 'next/link'
 
 const serif = Lora({
   subsets: ['latin'],
@@ -36,7 +37,7 @@ export default function RootLayout({
       <body className="font-serif">
         <div className="mx-auto max-w-4xl px-4 sm:px-12">
           <header className="mt-12 text-center sm:mt-20">
-            <h1 className="ml-1">
+            <Link tabIndex={-1} href="/" className="ml-1 block">
               <div className="font-script text-xl leading-1 sm:text-2xl">
                 Bienvenue à notre mariage
               </div>
@@ -46,7 +47,7 @@ export default function RootLayout({
               <div className="mt-2 text-sm tracking-[5px] uppercase sm:mt-4 sm:text-base">
                 – 15 Juli 2025 –
               </div>
-            </h1>
+            </Link>
           </header>
           <nav className="bg-beige sticky -top-px z-10 -mx-4 mt-8 flex justify-center gap-4 sm:mt-12 sm:gap-6">
             <div className="absolute w-full">
@@ -71,11 +72,6 @@ export default function RootLayout({
               <span className="px-4 tracking-[5px] uppercase">Bröllopet</span>
             </div>
             <CountDown />
-            <img
-              className="absolute top-1/2 left-1/2 z-10 w-44 -translate-x-1/2 -translate-y-1/2 opacity-10 md:w-72"
-              src="/logo.svg"
-              alt=""
-            />
           </footer>
         </div>
       </body>
