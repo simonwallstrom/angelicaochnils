@@ -6,61 +6,90 @@ import { rsvpSchema } from './schema'
 import { createNewsletterContact, ContactAlreadyExistsError } from './api'
 import { setSubmissionData } from './cookies'
 import type { CreateContactRequest } from './types'
+import { Redis } from '@upstash/redis'
+
+const LISTS = {
+  ATTENDING: 'mE6faz',
+  NOT_ATTENDING: 'NWT8nHDA8P',
+} as const
+
+const ERROR_MESSAGES = {
+  INVALID_CODE: 'Ogiltig inbjudningskod',
+  SAVE_ERROR:
+    'Det gick tyvärr inte att spara ditt svar. Vänligen försök igen om en stund. Om problemet kvarstår, kontakta Angelica och Nils.',
+  CONTACT_EXISTS:
+    'Det finns redan ett svar som är kopplat till denna e-postadress, kontakta Angelica och Nils om du vill uppdatera ditt svar.',
+} as const
+
+const redis = Redis.fromEnv()
+
+function createRequestData(formData: ReturnType<typeof rsvpSchema.parse>): CreateContactRequest {
+  const isAttending = formData.isAttending === 'true'
+
+  return {
+    first_name: formData.firstName,
+    last_name: formData.lastName,
+    email: formData.emailAddress,
+    lists: [
+      {
+        hash: isAttending ? LISTS.ATTENDING : LISTS.NOT_ATTENDING,
+      },
+    ],
+    attributes: {
+      telefonnummer: formData.phoneNumber,
+      'kommer-du': isAttending ? 'Ja' : 'Nej',
+      'antal-natter': formData.numberOfNights,
+      kostalternativ: formData.dietaryRequirements,
+      barn: formData.hasKids,
+      favoritlat: formData.favoriteSong,
+    },
+  }
+}
 
 export async function createContact(prevState: unknown, formData: FormData) {
-  await new Promise((resolve) => setTimeout(resolve, 2000))
-
-  const submission = parseWithZod(formData, {
-    schema: rsvpSchema,
-  })
-
+  const submission = parseWithZod(formData, { schema: rsvpSchema })
   if (submission.status !== 'success') {
     return submission.reply()
   }
 
   if (submission.value.code !== process.env.INVITATION_CODE) {
     return submission.reply({
-      fieldErrors: {
-        code: ['Ogiltig inbjudningskod'],
-      },
+      fieldErrors: { code: [ERROR_MESSAGES.INVALID_CODE] },
     })
   }
 
-  const requestData: CreateContactRequest = {
-    first_name: submission.value.firstName,
-    last_name: submission.value.lastName,
-    email: submission.value.emailAddress,
-    lists: [
-      {
-        hash: submission.value.isAttending === 'true' ? 'mE6faz' : 'NWT8nHDA8P',
-      },
-    ],
-    attributes: {
-      telefonnummer: submission.value.phoneNumber,
-      'kommer-du': submission.value.isAttending === 'true' ? 'Ja' : 'Nej',
-      'antal-natter': submission.value.numberOfNights,
-      kostalternativ: submission.value.dietaryRequirements,
-      barn: submission.value.hasKids,
-      favoritlat: submission.value.favoriteSong,
-    },
-  }
+  const requestData = createRequestData(submission.value)
 
-  const result = await createNewsletterContact(requestData)
+  try {
+    // Save to Redis
+    await redis.set(
+      `rsvp:${submission.value.emailAddress}:${Date.now()}`,
+      JSON.stringify({
+        submission: submission.value,
+        requestData,
+        timestamp: new Date().toISOString(),
+      }),
+    )
 
-  if (result.success === false) {
-    if (result.error instanceof ContactAlreadyExistsError) {
+    // Create newsletter contact
+    const result = await createNewsletterContact(requestData)
+    if (!result.success) {
+      throw result.error
+    }
+
+    // Set submission data
+    await setSubmissionData(result.data)
+  } catch (error) {
+    if (error instanceof ContactAlreadyExistsError) {
       return submission.reply({
-        formErrors: [
-          'Det finns redan ett svar som är kopplat till denna e-postadress, kontakta Angelica och Nils om du vill uppdatera ditt svar.',
-        ],
+        formErrors: [ERROR_MESSAGES.CONTACT_EXISTS],
       })
     }
 
     return submission.reply({
-      formErrors: ['Ett okänt fel uppstod'],
+      formErrors: [ERROR_MESSAGES.SAVE_ERROR],
     })
   }
 
-  await setSubmissionData(result.data)
   redirect('/osa/tack')
 }
