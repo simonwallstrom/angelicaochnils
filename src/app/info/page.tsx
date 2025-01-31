@@ -49,7 +49,7 @@ export default function Page() {
       </p>
 
       <h2 className="mt-4 text-xl font-medium sm:mt-8">Klädkod</h2>
-      <p className="mt-3 leading-relaxed">Sommarkavaj</p>
+      <p className="mt-3 leading-relaxed">Kavaj</p>
 
       <h2 className="mt-4 text-xl font-medium sm:mt-8">Barn</h2>
       <p className="mt-3 leading-relaxed">
@@ -75,7 +75,7 @@ export default function Page() {
       <h2 className="mt-4 text-xl font-medium sm:mt-8">Konfetti och fyrverkerier</h2>
       <p className="mt-3 leading-relaxed">
         Vem älskar inte konfetti? Men inte idag. Städavgift för konfettibomber eller liknande inne
-        och utanför herrgården är 7500 kr. Fyrverkerier tackar vi ödmjukas nej till.
+        och utanför herrgården är 7500 kr. Fyrverkerier tackar vi ödmjukast nej till.
       </p>
     </div>
   )
